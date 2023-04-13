@@ -1,6 +1,6 @@
 ### blog_system
 #####《博客系统》......其他信息待补充
-  1.源码文件中的application.yml，第二行的port端口，必须得是不被占用的；
+  \1.源码文件中的application.yml，第二行的port端口，必须得是不被占用的；
 
   2.application-jdbc.properties中的MySQL账号和密码需要和自己本地一致；
 
