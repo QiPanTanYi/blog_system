@@ -1,0 +1,11 @@
+
+html{
+    cursor: url("../img/arrow.png"),auto;
+}
+input,a,p,button,textarea,ul,li{
+    cursor:url("../img/click.png"),pointer;
+}
+
+/*图标版权声明*/
+/*arrow.png  https://www.flaticon.com/free-icon/arrow_10531473*/
+/*click.png  https://www.flaticon.com/free-icon/click_4713372*/
