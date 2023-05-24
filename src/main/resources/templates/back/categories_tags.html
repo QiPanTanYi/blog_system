@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='管理中心',active='home'">
+<header th:replace="back/header::headerFragment(${title},${active})"></header>
+<head>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/cursor.css}">
+</head>
+<!--<script th:src="@{https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.min.js}"></script>-->
+<script th:src="@{/back/js/echarts.min.js}"></script>
+<style>
+    #main{
+        height: 600px;
+        background-color: rgb(245,245,245);
+    }
+</style>
+<body class="fixed-left">
+<div id="wrapper">
+    <div th:replace="back/header::header-body"></div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">分类/标签</h4>
+                    </div>
+                    <div class="col-md-12">
+
+                            <div id="main" class="col-md-5"></div>
+
+
+                            <div class="col-md-7">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>文章</th>
+                                        <th>标签</th>
+                                        <th>分类</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="categroy : ${categroy.list}">
+                                        <tr th:id="${categroy.id}">
+                                            <td><th:block th:text="${categroy.title}" /></td>
+                                            <td><th:block th:text="${categroy.tags}" /></td>
+                                            <td><th:block th:text="${categroy.categories}" /></td>
+                                            <!--编辑分类-->
+<!--                                            <td><a class="btn btn-primary btn-sm">-->
+<!--                                                <i class="fa fa-edit"></i>-->
+<!--                                                <span>编辑分类</span></a></td>-->
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        编辑分类
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li>
+                                                            <a href="javascript:void(0)" th:onclick="'ArticleCat1('+${categroy.id}+');'" class="btn-primary">
+                                                                <i class="fa fa-edit"></i> <span>入门</span></a></li>
+                                                        <li>
+                                                            <a href="javascript:void(0)" th:onclick="'ArticleCat2('+${categroy.id}+');'" class="btn-danger">
+                                                                <i class="fa fa-edit"></i> <span>进阶</span></a></li>
+                                                        <li>
+                                                            <a href="javascript:void(0)" th:onclick="'ArticleCat3('+${categroy.id}+');'" class="btn-warning">
+                                                                <i class="fa fa-edit"></i> <span>高级</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                                <div th:replace="comm/paging :: pageAdminNav(${categroy})"></div>
+                            </div>
+                    </div>
+
+                </div>
+                <div th:replace="back/footer :: footer-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="back/footer :: footer"></div>
+</body>
+
+<script type="text/javascript">
+
+    // ajax请求
+    function ArticleCat1(id) {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        console.log(token)
+        console.log(header)
+        if (confirm('确定修改该文章分类为 入门 吗?')) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/category/rm',
+                data: {id: id},
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function (result) {
+                    if (result && result.success) {
+                        window.alert("分类修改成功");
+                        window.location.reload();
+                    } else {
+                        window.alert(result.msg || '分类修改失败')
+                    }
+                }
+            });
+        }
+    }
+
+    function ArticleCat2(id) {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        console.log(token)
+        console.log(header)
+        if (confirm('确定修改该文章分类为 进阶 吗?')) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/category/jj',
+                data: {id: id},
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function (result) {
+                    if (result && result.success) {
+                        window.alert("分类修改成功");
+                        window.location.reload();
+                    } else {
+                        window.alert(result.msg || '分类修改失败')
+                    }
+                }
+            });
+        }
+    }
+
+    function ArticleCat3(id) {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        console.log(token)
+        console.log(header)
+        if (confirm('确定修改该文章分类为 高级 吗?')) {
+            $.ajax({
+                type: 'post',
+                url: '/admin/category/gj',
+                data: {id: id},
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function (result) {
+                    if (result && result.success) {
+                        window.alert("分类修改成功");
+                        window.location.reload();
+                    } else {
+                        window.alert(result.msg || '分类修改失败')
+                    }
+                }
+            });
+        }
+    }
+
+    var Numdata =[]
+    function CountCat1() {
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        console.log(token)
+        console.log(header)
+        $.ajax({
+                type: 'post',
+                url: '/admin/category/count1',
+                data: {},
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+            success: function (result) {
+                if (result && result.success) {
+                    TransferStation(result.payload)
+                    console.log("result的内容"+result)
+                    console.log("num的内容"+result.payload)
+                    Flower();
+                } else {
+                    console.log("失败")
+                }
+            }
+        });
+        function TransferStation(data) {
+            Numdata.push(data)
+            console.log("233")
+            console.log(Numdata)
+            console.log(Numdata[0][0])
+            console.log("233")
+        }
+    }
+
+    CountCat1()
+function Flower(){
+        //玫瑰花图
+        var charts = echarts.init(document.getElementById("main"))
+        option = {
+            backgroundColor: 'rgb(245,245,245)',
+            title: {
+                text: '分类分布',
+                left: 'center',
+                top: 0,
+                textStyle: {
+                    color: 'black',
+                    fontFamily: '黑体',
+                    fontSize: 28
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                x: 32,
+                y: 74,
+                textStyle: {
+                    color: 'black',
+                    fontFamily: '黑体',
+                    fontSize: 14
+                }
+            },
+            series: [
+                {
+                    name: 'Nightingale Chart',
+                    type: 'pie',
+                    label: {
+                        show: true,
+                        formatter: '{b}:{c}\n{d}%',
+                        //饼图里面标签设置占比的格式
+                        position: 'inside',
+                        color: 'black'
+                    },
+                    radius: [60, 215],
+                    center: ['42%', '57%'],
+                    roseType: 'area',
+                    itemStyle: {
+                        borderRadius: 8
+                    },
+                    color: ['#FFC0CB', '#D8BFD8', '#B0C4DE', '#87CEEB'],
+                    //颜色设置
+                    data: [
+                        {value: Numdata[0][1], name: '入门'},
+                        {value: Numdata[0][2], name: '进阶'},
+                        {value: Numdata[0][3], name: '高级'},
+                        {value: Numdata[0][0], name: '默认'},
+                    ]
+                }
+            ]
+        };
+        charts.setOption(option);
+    }  //这个引号是用来调用前面内容的Echarts
+
+</script>
+</html>
