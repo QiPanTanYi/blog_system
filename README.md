@@ -1,6 +1,6 @@
 ### blog_system
 
-#####《博客系统》源码使用文档
+##### 《博客系统》源码使用文档
   <br><br>  1.源码文件中的application.yml，第二行的port端口，必须得是不被占用的；
 
   2.application-jdbc.properties中的MySQL账号和密码需要和自己本地一致；
@@ -21,7 +21,7 @@ Maven中的settings.xml和repository文件夹与本地路径一致；
 ![](Document/11.png)
 <br>
 
-#####主要内容
+##### 主要内容
 
 （1）在dao目录下封装有主要的sql语句。
 
