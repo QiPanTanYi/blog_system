@@ -12,12 +12,15 @@
 Maven中的settings.xml和repository文件夹与本地路径一致；
 
   5.blog_system.sql直接拖进Navicat就行，会生成对应的数据库，确保数据库存在再运行。
+  
   6.QQ邮箱记得改啊（application-mail.properties），
 如果要测试邮件是否能发送，可以直接看Text类的注释，运行测试类就行。
+
   7.resources文件夹在IDEA中需要手动改个格式（具体如图所示）：
 
 ![](Document/11.png)
 <br>
+
 #####主要内容
 
 （1）在dao目录下封装有主要的sql语句。
