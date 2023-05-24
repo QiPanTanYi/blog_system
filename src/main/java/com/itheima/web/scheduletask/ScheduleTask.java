@@ -25,7 +25,7 @@ public class ScheduleTask {
      * 定时邮件发送任务，每月1日中午12点整发送邮件
      */
     @Scheduled(cron = "0 0 12 1 * ?")
-//    @Scheduled(cron = "0 */3 * * * ? ")
+//    @Scheduled(cron = "0 * * * * * ")       //测试邮件是否能发送成功，需要解除注释此行，并注释上一行，重启项目或者运行测试类即可收到邮件
     public void sendEmail(){
         //  定制邮件内容
         long totalvisit = statisticMapper.getTotalVisit();
