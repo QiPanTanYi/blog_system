@@ -2,8 +2,9 @@
 
 # 《博客系统》源码使用文档
   <br>
+  
   0.配置材料信息：JDK1.8, MySQL8.0, Redis
-  <br>
+  
   1.源码文件中的application.yml，第二行的port端口，必须得是不被占用的；
 
   2.application-jdbc.properties中的MySQL账号和密码需要和自己本地一致；
